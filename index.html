@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            background-color: #ffccdc;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 28px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            background-color: #d63384;
+        }
+        .hidden {
+            display: none;
+        }
+        .gif-container img {
+            width: 200px;
+            margin: 10px;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: floatHearts 5s infinite ease-in-out;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Initial Question -->
+    <div class="container" id="question">
+        <img src="nas valentine.jpg" alt="Your Image" width="250">
+        <h1>Nas, will you be my valentine?</h1>
+        <div class="buttons">
+            <button onclick="sayYes()">Yes</button>
+            <button onclick="sayNo()">No</button>
+        </div>
+    </div>
+
+    <!-- Yes Response -->
+    <div class="container hidden" id="yes-response">
+        <h1>Jag älskar dig ❤️</h1>
+        <div class="gif-container">
+            <img src="anime girl.gif" alt="Cute GIF 1">
+            <img src="cute dog.gif" alt="Cute GIF 2">
+        </div>
+    </div>
+
+    <!-- No Response -->
+    <div class="container hidden" id="no-response">
+        <h1>Are you sure about that? 🤨</h1>
+        <img src="are you sure.gif" alt="Are you sure GIF">
+        <div class="buttons">
+            <button onclick="changeMind()">I changed my mind, yes!</button>
+        </div>
+    </div>
+
+    <script>
+        function sayYes() {
+            document.getElementById("question").style.display = "none";
+            document.getElementById("yes-response").style.display = "block";
+            document.getElementById("no-response").style.display = "none";
+        }
+
+        function sayNo() {
+            document.getElementById("question").style.display = "none";
+            document.getElementById("no-response").style.display = "block";
+        }
+
+        function changeMind() {
+            document.getElementById("no-response").style.display = "none";
+            document.getElementById("yes-response").style.display = "block";
+        }
+
+        // Floating Hearts Animation
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            document.getElementById("hearts-container").appendChild(heart);
+
+            let size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
